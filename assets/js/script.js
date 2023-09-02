@@ -36,8 +36,19 @@ document.addEventListener("DOMContentLoaded", function () {
 //When the page is finished loading and all of the dom content is loaded.then the code in this code block above will execute.
 // Otherwise could be targeting elements in your page that doesnt existe or havent loaded yet.
 
+
+//I'm gonna to put docstring above function name.
+//docstrings are created in JS with slash, star, syntax.
+
+/** docstring used to describe functions 
+ * The main game "loop", called when the script is first loaded
+ * and after the user answer has been processed
+ */
 function runGame() {
 
+    //create two random numbers between 1 and 25 we can use this to display our questions.
+    let num1 = Math.floor(Math.random() * 25) + 1;
+    let num2 = Math.floor(Math.random() * 25) + 1;
 }
 
 function checkAnswer() {
