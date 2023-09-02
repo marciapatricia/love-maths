@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let button of buttons) {
         button.addEventListener("click", function () {
             if (this.getAttribute("data-type") === "submit") {
-                alert("You clicked Submit!");
+                checkAnswer();
             } else {
                 let gameType = this.getAttribute("data-type");
                 runGame(gameType);
@@ -63,14 +63,55 @@ function runGame(gameType) { //need to supply parameters functions is going to a
 }
 
 
-
+/**
+ * Check the answer against the first element in
+ * the returned calculateCorrectAnswer array
+ */
 function checkAnswer() {
 
+    let userAnswer = parseInt(document.getElementById("answer-box").value);
+    let calculatedAnswer = calculateCorrectAnswer();
+    let isCorrect = userAnswer === calculatedAnswer[0];
+
+    if (isCorrect) {
+        alert("Hey! You got it right! :D");
+    } else {
+        alert(`Awwww.... you answered ${userAnswer}. The correct answer was ${calculatedAnswer[0]}!`);
+    }
+
+    runGame(calculatedAnswer[1]);
+
 }
 
+
+// We do not want to pollute global namespace and try to avoide creating global variables. How we can determine the game type we are going to read it from the dom.
+//if operator is a plus + we know is addition game, if is a minus - we know is subctration etc...
+//we are also going to read two operands from the dom to calculate the correct answer.
+
+/**
+ * Get the opernds (the numbers) and the operator (plus, minus, multiply etc)
+ * directly from the dom, and returns the correct answer.
+ */
 function calculateCorrectAnswer() {
 
+
+    let operand1 = parseInt(document.getElementById('operand1').innerText);
+    let operand2 = parseInt(document.getElementById('operand2').innerText);
+    let operator = document.getElementById("operator").innerText;
+
+    if (operator === "+") {
+        return [operand1 + operand2, "addition"];
+    } else {
+        alert(`Unimplemented operator ${operator}`);
+        throw `Unimplemented operator ${operator}. Aborting!`;
+    }
+
 }
+//get the value of elemente with the id of operand 2 from html. The parseInt function to make sure we treat the valuje as an integer, whole number
+//get the value of elemente with the id of operand 1 from html. The parseInt function to make sure we treat the valuje as an integer, whole number
+//get the value of elemente with the id of operator
+
+//by default JS reutrns element as a string, but we can do matematical operations on a string.
 
 function incrementScore() {
 
