@@ -14,10 +14,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("You clicked Submit!");
             } else {
                 let gameType = this.getAttribute("data-type");
-                alert(`You clicked ${gameType}`);
+                runGame(gameType);
             }
         });
     }
+
+    runGame("addition");
 });
 
 //Through the if statement above we are going to check the attribute of the data type to see what its value is.
@@ -44,12 +46,23 @@ document.addEventListener("DOMContentLoaded", function () {
  * The main game "loop", called when the script is first loaded
  * and after the user answer has been processed
  */
-function runGame() {
+function runGame(gameType) { //need to supply parameters functions is going to accept
 
     //create two random numbers between 1 and 25 we can use this to display our questions.
     let num1 = Math.floor(Math.random() * 25) + 1;
     let num2 = Math.floor(Math.random() * 25) + 1;
+
+    //now we need to check which game type we are running with an if statement
+    //call the apropriate function to display the question
+    if (gameType === "addition") {
+        displayAdditionQuestion(num1, num2);
+    } else {
+        alert(`Unkown game type: ${gameType} `);
+        throw `Unkown game type: ${gameType}. Aborting`; //will throw an error for debugging
+    }
 }
+
+
 
 function checkAnswer() {
 
@@ -67,8 +80,10 @@ function incrementWrongAnswer() {
 
 }
 
-function displayAdditionQuestion() {
-
+function displayAdditionQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1;
+    document.getElementById('operand2').textContent = operand2;
+    document.getElementById('operator').textContent = "+";
 }
 
 function displaySubtractQuestion() {
