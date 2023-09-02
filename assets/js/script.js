@@ -19,6 +19,13 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    document.getElementById("answer-box").addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+            checkAnswer();
+        }
+    });
+    // in this case we are checking the key property and we are saying if the key that was pressed was enter then run this function.
+
     runGame("addition");
 });
 
@@ -47,6 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
  * and after the user answer has been processed
  */
 function runGame(gameType) { //need to supply parameters functions is going to accept
+
+    document.getElementById("answer-box").value = ""; //answer to answer box being empty so we dont need to delete value to enter another one
+    document.getElementById("answer-box").focus(); //each time the run game is called the answer box will again again the focus, so the cursor will be ready for us to type in our answer.
 
     //create two random numbers between 1 and 25 we can use this to display our questions.
     let num1 = Math.floor(Math.random() * 25) + 1;
