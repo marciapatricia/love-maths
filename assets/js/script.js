@@ -58,7 +58,10 @@ function runGame(gameType) { //need to supply parameters functions is going to a
         displayAdditionQuestion(num1, num2);
     } else if (gameType === "multiply") {
         displayMultiplyQuestion(num1, num2);
+    } else if (gameType === "subtract") {
+        displaySubtractQuestion(num1, num2);
     } else {
+
         alert(`Unkown game type: ${gameType} `);
         throw `Unkown game type: ${gameType}. Aborting`; //will throw an error for debugging
     }
@@ -107,6 +110,8 @@ function calculateCorrectAnswer() {
         return [operand1 + operand2, "addition"];
     } else if (operator === "x") {
         return [operand1 * operand2, "multiply"];
+    } else if (operator === "-") {
+        return [operand1 - operand2, "subtract"];
     } else {
         alert(`Unimplemented operator ${operator}`);
         throw `Unimplemented operator ${operator}. Aborting!`;
@@ -142,8 +147,15 @@ function displayAdditionQuestion(operand1, operand2) {
     document.getElementById('operator').textContent = "+";
 }
 
-function displaySubtractQuestion() {
+function displaySubtractQuestion(operand1, operand2) {
+    document.getElementById('operand1').textContent = operand1 > operand2 ? operand1 : operand2;
+    document.getElementById('operand2').textContent = operand1 > operand2 ? operand2 : operand1;
+    document.getElementById('operator').textContent = "-";
 
+
+    //the contion we are checking goes before question mark
+    //the question is operand 1 bigger than operand 2?
+    //If so, return operand 1 and if not (:) after colon return operand 2
 }
 
 function displayMultiplyQuestion(operand1, operand2) {
